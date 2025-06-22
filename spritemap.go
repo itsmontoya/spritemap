@@ -39,6 +39,30 @@ type Spritemap struct {
 	columns int
 }
 
+func (s *Spritemap) GetByIndex(index int) (out *ebiten.Image, err error) {
+	switch {
+	case index >= len(s.tiles):
+		err = fmt.Errorf("index of <%d> is out of bounds, total length is <%d>", index, len(s.tiles))
+		return
+	case index < 0:
+		err = fmt.Errorf("index of <%d> is less than 0", index)
+		return
+	default:
+		return s.tiles[index], nil
+	}
+}
+
+func (s *Spritemap) GetByRowAndColumn(row, column int) (out *ebiten.Image, err error) {
+	index := s.getIndex(row, column)
+	return s.GetByIndex(index)
+}
+
+func (s *Spritemap) getIndex(row, column int) (index int) {
+	index = s.columns * row
+	index += column
+	return
+}
+
 func (s *Spritemap) appendTile(row, column int) {
 	sx := column * (s.tileSize + s.tileSpacing)
 	sy := row * (s.tileSize + s.tileSpacing)
@@ -54,23 +78,4 @@ func (s *Spritemap) forEach(fn func(row, column int)) {
 			fn(row, column)
 		}
 	}
-}
-
-func (s *Spritemap) GetByIndex(index int) (out *ebiten.Image, err error) {
-	switch {
-	case index >= len(s.tiles):
-		err = fmt.Errorf("index of <%d> is out of bounds, total length is <%d>", index, len(s.tiles))
-		return
-	case index < 0:
-		err = fmt.Errorf("index of <%d> is less than 0", index)
-		return
-	default:
-		return s.tiles[index], nil
-	}
-}
-
-func (s *Spritemap) GetByRowAndColumn(row, column int) (out *ebiten.Image, err error) {
-	index := s.columns * row
-	index += column
-	return s.GetByIndex(index)
 }
