@@ -2,8 +2,6 @@
 
 A lightweight Go library for handling sprite sheets and tiled maps, built for 2D games using Ebiten. Spritemap makes it easy to extract and render individual tiles from a sprite sheet with configurable tile size and spacing.
 
----
-
 ## 🚀 Features
 
 - Simple API for working with tile-based sprite sheets
@@ -12,15 +10,11 @@ A lightweight Go library for handling sprite sheets and tiled maps, built for 2D
 - Built to work seamlessly with [Ebiten](https://ebiten.org/)
 - Pure Go with no external dependencies
 
----
-
 ## 📦 Installation
 
 ```bash
 go get github.com/itsmontoya/spritemap@latest
 ```
-
----
 
 ## ⚙️ Quick Start
 
@@ -68,8 +62,6 @@ if err == nil {
 }
 ```
 
----
-
 ## 🎨 API Reference
 
 ### `New(src image.Image, tileSize, tileSpacing int) (*Spritemap, error)`
@@ -87,8 +79,6 @@ Returns the tile image at a 0-based index. Returns an error if out of bounds.
 ### `(*Spritemap) GetByRowAndColumn(row, column int) (*ebiten.Image, error)`
 
 Returns the tile image at a given row and column. Returns an error if coordinates are out of bounds.
-
----
 
 ## 📚 Example Use Case
 
@@ -109,14 +99,10 @@ for y, row := range level {
 }
 ```
 
----
-
 ## 💡 Tips & Notes
 
 - Tiles are read left-to-right, top-to-bottom
 - `embed` makes it easy to bundle sprite sheets into your Go binary
-
----
 
 ## 📚 Examples
 
@@ -124,20 +110,14 @@ Check out the included `examples/tiles.go`, which shows:
 - Loading a sprite sheet
 - Rendering a tile in Ebiten
 
----
-
 ## 💡 Tips & Tricks
 
 - Use `embed` to bundle your sprite sheet for easy distribution.
 - Tile indexes are read **left-to-right, top-to-bottom** starting at 0.
 
----
-
 ## 🧑‍💻 Contributing
 
 Contributions welcome! Please open PRs for bug fixes, new features, or examples.
-
----
 
 ## 📄 License
 
