@@ -62,23 +62,43 @@ if err == nil {
 }
 ```
 
-## 🎨 API Reference
+## 📚 Usage
 
-### `New(src image.Image, tileSize, tileSpacing int) (*Spritemap, error)`
+### `spritemap.New`
 
-Creates a new `Spritemap` from a decoded image, specifying the tile size and spacing between tiles.
+Creates a `Spritemap` from a decoded image.
 
-### `NewFromFile(filename string, tileSize, tileSpacing int) (*Spritemap, error)`
+```go
+sm, err := spritemap.New(img, tileSize, tileSpacing)
+```
 
-Loads a file from disk and creates a new `Spritemap`.
+- `img` – a decoded `image.Image` (e.g. from `image.Decode`)
+- `tileSize` – width and height of each tile (e.g. `16`)
+- `tileSpacing` – spacing between tiles in pixels (can be `0`)
 
-### `(*Spritemap) GetByIndex(index int) (*ebiten.Image, error)`
+### `spritemap.NewFromFile`
 
-Returns the tile image at a 0-based index. Returns an error if out of bounds.
+Creates a `Spritemap` from a PNG file.
 
-### `(*Spritemap) GetByRowAndColumn(row, column int) (*ebiten.Image, error)`
+```go
+sm, err := spritemap.NewFromFile("tiles.png", 16, 0)
+```
 
-Returns the tile image at a given row and column. Returns an error if coordinates are out of bounds.
+### `(*Spritemap) GetByIndex`
+
+Gets a tile by its flat index.
+
+```go
+tile, err := sm.GetByIndex(5)
+```
+
+### `(*Spritemap) GetByRowAndColumn`
+
+Gets a tile by row and column.
+
+```go
+tile, err := sm.GetByRowAndColumn(1, 3)
+```
 
 ## 📚 Example Use Case
 
